@@ -196,14 +196,14 @@ export class VCarousel {
             margin: 0 ${100 / this.pagesize / 4}%;
            }`}
         </style>
-        <section>
-          <h2 tabindex={"-1"}>{this.sectionTitle}<span
+        <section aria-labeledby={"sectionTitle"}>
+          <h2 id={"sectionTitle"} tabindex={"-1"}>{this.sectionTitle}<span
             class={"sr-only"}>{`, has ${this.pageMax} pages with ${this.pagesize} each`}</span></h2>
           <div class={"carousel-body"}>
             <button type={'button'} onClick={this._decSlide}><span
-              class={"sr-only"}>{`Show page ${this.page - 1} of ${this.pageMax}`}</span></button>
+              class={"sr-only"}>{`Previous Page Show page ${this.page <= 0 ? this.pageMax : this.page - 1} of ${this.pageMax}`}</span></button>
             <button type={'button'} onClick={this._advSlide}><span
-              class={"sr-only"}>{`Show page ${this.page + 1} of ${this.pageMax}`}</span></button>
+              class={"sr-only"}>{`Next Page Show page ${this.page + 1} of ${this.pageMax}`}</span></button>
             <ol class={"carousel-wrapper"}>
               {this.children}
             </ol>
