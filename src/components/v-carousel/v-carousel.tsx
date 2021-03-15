@@ -160,8 +160,7 @@ export class VCarousel {
         } else {
           if (inc === false && this.page === 0 && (this.children.length - this.pagesize) < i) {
             // if we're on the first page (and decrementing), prep to the last view's
-            // worth of children so if we decrement again and wrap around, the animation comes from the left side
-            console.log("special")
+            // worth of children so if we decrement again and wrap around, the animation should come from the left side
             setL(cur);
             continue
           }
@@ -170,7 +169,7 @@ export class VCarousel {
       }
     }
     for (let i = 0; i < this.paginationItems.length; i++) {
-      const currentItem = this.paginationItems[i]['$elm$'];
+      const currentItem = this.paginationItems[i]['$elm$'].querySelector('button');
       console.debug("current pagination item: ", currentItem)
       if (i === this.page) {
         currentItem.classList.toggle('active', true);

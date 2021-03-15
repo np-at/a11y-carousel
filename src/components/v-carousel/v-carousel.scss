@@ -1,57 +1,62 @@
 /**************  Baseline definitions, resets   **************/
 :host {
-  width: 100%;
   display: block;
-}
-section {
   width: 100%;
+
+  & * {
+    box-sizing: border-box;
+  }
+}
+
+section {
   margin-left: 1em;
-  margin-right: 1em
+  margin-right: 1em;
+  width: 100%;
 }
+
 @supports not selector(:focus-visible) {
-*:focus {
-  outline: 2px black solid;
-  border: 2px white solid;
-  box-shadow: none;
-  overflow: visible;
+  *:focus {
+    border: 2px #fff solid;
+    outline: 2px #000 solid;
+    overflow: visible;
+  }
 }
 
-}
 @supports selector(:focus-visible) {
-// we can safely remove the user agent focus if focus-visible is supported
-*:focus {
-  outline: none;
-  border: none;
-}
+  // we can safely remove the user agent focus if focus-visible is supported
+  *:focus {
+    border: unset;
+    outline: none;
+  }
 
-*:focus-visible {
-  outline: 2px black solid;
-  border: 2px white solid;
-  box-shadow: none;
-  overflow: visible;
-}
+  *:focus-visible {
+    border: 2px white solid;
+    box-shadow: none;
+
+    outline: 2px #000 solid;
+    overflow: visible;
+  }
 
 }
 
 button {
+  background: none;
+  border: unset;
   // reset
   cursor: pointer;
-  background: none;
   outline: none;
-  border: none;
 }
 
 .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important;
-  -webkit-clip-path: inset(50%) !important;
   clip-path: inset(50%) !important;
   height: 1px !important;
   overflow: hidden !important;
   padding: 0 !important;
   position: absolute !important;
-  width: 1px !important;
   white-space: nowrap !important;
+  width: 1px !important;
 }
 
 
@@ -59,37 +64,47 @@ button {
 
 .carousel-body {
   display: inline-flex;
-  width: 100%;
   min-width: fit-content;
+  width: 100%;
 
   & > button {
-    width: 50px;
-    min-height: 110px;
-    padding: 10px 30px;
-    margin-left: .5em;
-    margin-right: .5em;
-    background-image: url("build/assets/l-chev.svg");
+    align-self: center;
+    background-color: transparent;
+    background-image: url('build/assets/l-chev.svg');
     background-repeat: no-repeat;
     background-size: contain;
-    background-color: transparent;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    min-height: 110px;
+    padding: 10px 30px;
+    width: 50px;
+
     &:first-child {
       transform: rotate(180deg);
     }
+
     &:nth-child(2) {
-      order:100;
+      order: 100;
     }
   }
 }
 
-ol.pagination-nav {
+ol {
+  display: inline-flex;
+  list-style: none;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.pagination-nav {
   display: block;
-  width: 100%;
   text-align: center;
+  width: 100%;
 
   & > li {
     display: inline-block;
-    text-align: center;
     margin: auto;
+    text-align: center;
 
     & > button {
 
@@ -97,66 +112,50 @@ ol.pagination-nav {
 
       & > img {
         display: block;
+        height: auto;
         size: auto;
         width: fit-content;
-        height: auto;
 
       }
     }
 
-    &.active * {
-      fill: black;
-    }
-  }
-
-  li.pagination-item {
 
   }
 
 }
 
-ol {
-  display: inline-flex;
-  list-style: none;
-  margin-top: auto;
-  margin-bottom: auto;
+.active[aria-current='true'] circle {
+  fill: #000;
+}
 
+.carousel-wrapper {
+  align-content: space-between;
+  display: flex;
+  height: 100%;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 0.5em 0.75em;
+  width: 100%;
 
-  &.carousel-wrapper {
-    width: 100%;
+  & > li {
+    align-items: start;
+    //padding: 2em;
+    display: none;
     height: 100%;
-    overflow: hidden;
-    padding: .5em .75em;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    align-content: space-between;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: flex-start;
-    & > li {
-      height: 100%;
-      //padding: 2em;
-      display: none;
 
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: auto;
-      margin-bottom: auto;
-      align-items: start;
-      min-width: 50px;
+    margin: auto;
+    min-width: 50px;
 
-      &.active {
-        display: block;
+    &.active {
+      border: 2px solid #808;
+      display: block;
 
-        outline: 2px solid purple;
-        border: 2px solid purple;
-      }
+      outline: 2px solid #808;
     }
-
   }
 
 }
+
 
 .l-slide {
   // for debugging purposes
@@ -164,9 +163,9 @@ ol {
   left: -100vw;
 
   &.active {
+    animation: slidel 0.5s forwards;
     left: auto;
     position: relative;
-    animation: slidel 0.5s forwards;
 
 
   }
@@ -179,78 +178,97 @@ ol {
   right: -100vw;
 
   &.active {
+    animation: slide-r 0.5s forwards;
+    position: relative;
 
     right: auto;
-    position: relative;
-    -webkit-animation: slide-r 1s forwards;
-    animation: slide-r 0.5s forwards;
-  }
-}
-
-@-webkit-keyframes slide-r {
-  0% {
-    right: -80vw;
-    opacity: 0;
-    display: none;
-  }
-  50% {
-    opacity: 70%;
-  }
-  100% {
-    right: 0;
-    opacity: 100%;
-    display: block
   }
 }
 
 @keyframes slide-r {
   0% {
-    right: -80vw;
-    opacity: 0;
     display: none;
+    opacity: 0;
+    right: -80vw;
   }
+
   50% {
     opacity: 70%;
   }
+
   100% {
-    right: 0;
+    display: block;
     opacity: 100%;
-    display: block
+    right: 0;
   }
 }
 
-@-webkit-keyframes slidel {
+@keyframes slide-r {
   0% {
-    left: -80vw;
-    opacity: 0;
     display: none;
+    opacity: 0;
+    right: -80vw;
   }
+
   50% {
     opacity: 70%;
   }
+
   100% {
-    left: 0;
+    display: block;
     opacity: 100%;
-    display: block
+    right: 0;
   }
 }
 
 @keyframes slidel {
   0% {
+    display: none;
     left: -80vw;
     opacity: 0;
-    display: none;
   }
+
   50% {
     opacity: 70%;
   }
+
   100% {
+    display: block;
     left: 0;
     opacity: 100%;
-    display: block
+  }
+}
+
+@keyframes slidel {
+  0% {
+    display: none;
+    left: -80vw;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 70%;
+  }
+
+  100% {
+    display: block;
+    left: 0;
+    opacity: 100%;
   }
 }
 
 slot {
   display: none;
+}
+
+
+/********************* Card ******************/
+
+.product-card__details {
+  font-size: 12px;
+  line-height: 19px;
+  min-height: 114px;
+  position: relative;
+  text-align: center;
+  width: 100%;
 }
