@@ -3,7 +3,7 @@ An attempt to create a more accessible web carousel component.
 
 Leverages stenciljs.
 
-The actual component is located in `src/v-carousel`
+The actual component is located in `src/components/v-carousel`
 
 See https://stenciljs.com/docs/introduction for more information about the framework
 
