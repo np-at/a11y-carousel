@@ -6,26 +6,12 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
-    }
     interface VCarousel {
         /**
           * The number of elements to show per page view. Defaults to 3
           * @type {number}
          */
-        "pagesize": number;
+        "pageSize": number;
         /**
           * Section title to use in heading
           * @type {string}
@@ -35,16 +21,10 @@ export namespace Components {
           * If defined/true, sets a mutation observer to reinitialize the component when child nodes are changed.  Otherwise ignores changes to child nodes.
           * @type {boolean}
          */
-        "watchchildren": boolean;
+        "watchChildren": boolean;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
-    }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
-    };
     interface HTMLVCarouselElement extends Components.VCarousel, HTMLStencilElement {
     }
     var HTMLVCarouselElement: {
@@ -52,31 +32,16 @@ declare global {
         new (): HTMLVCarouselElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
         "v-carousel": HTMLVCarouselElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
-    }
     interface VCarousel {
         /**
           * The number of elements to show per page view. Defaults to 3
           * @type {number}
          */
-        "pagesize"?: number;
+        "pageSize"?: number;
         /**
           * Section title to use in heading
           * @type {string}
@@ -86,10 +51,9 @@ declare namespace LocalJSX {
           * If defined/true, sets a mutation observer to reinitialize the component when child nodes are changed.  Otherwise ignores changes to child nodes.
           * @type {boolean}
          */
-        "watchchildren"?: boolean;
+        "watchChildren"?: boolean;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
         "v-carousel": VCarousel;
     }
 }
@@ -97,7 +61,6 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "v-carousel": LocalJSX.VCarousel & JSXBase.HTMLAttributes<HTMLVCarouselElement>;
         }
     }

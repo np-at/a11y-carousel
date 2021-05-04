@@ -22,7 +22,7 @@ export class VCarousel {
    Defaults to 3
    * @type {number}
    */
-  @Prop() readonly pagesize: number = 3;
+  @Prop() readonly pageSize: number = 3;
 
 
   /**
@@ -32,7 +32,7 @@ export class VCarousel {
    * Otherwise ignores changes to child nodes.
    * @type {boolean}
    */
-  @Prop() readonly watchchildren: boolean = false;
+  @Prop() readonly watchChildren: boolean = false;
 
   @State() private page = 0;
 
@@ -50,23 +50,23 @@ export class VCarousel {
 
 
   componentWillLoad() {
-    if (this.watchchildren) {
-      const observer = new MutationObserver(this._initilize);
+    if (this.watchChildren) {
+      const observer = new MutationObserver(this._initialize);
       observer.observe(this.host, {attributes: false, childList: true, subtree: false})
 
     }
-    this._initilize();
+    this._initialize();
   }
 
   componentDidLoad() {
     this._updateActive();
   }
 
-  private _initilize = (..._) => {
+  private _initialize = (..._) => {
     console.debug("mutation args?: ", ..._)
-    this.children = Array.from(this.host.children).map((child, index) => <li key={`c+${index}`}
+    this.children = Array.from(this.host.children).map((child, index) => <li key={`c+${index}`} aria-setsize={this.host.children.length} aria-posinset={index}
                                                                              innerHTML={child.outerHTML}/>);
-    this.pageMax = Math.floor(this.children.length / this.pagesize) + (this.children.length % this.pagesize === 0 ? 0 : 1);
+    this.pageMax = Math.floor(this.children.length / this.pageSize) + (this.children.length % this.pageSize === 0 ? 0 : 1);
     this._initPaginationItems();
 
   }
@@ -136,10 +136,10 @@ export class VCarousel {
     }
 
     // starting index of our active range
-    const start = this.page * this.pagesize;
+    const start = this.page * this.pageSize;
 
     // ending index of our active range
-    const end = start + this.pagesize;
+    const end = start + this.pageSize;
 
 
     for (let i = 0; i < this.children.length; i++) {
@@ -147,7 +147,7 @@ export class VCarousel {
       const cur = this.children[i]['$elm$'];
       if (i < start) {
 
-        if (inc === true && this.page === (this.pageMax - 1) && i < this.pagesize) {
+        if (inc === true && this.page === (this.pageMax - 1) && i < this.pageSize) {
           // if we're on the last page (and incrementing), prep to the first view's
           // worth of children so if we increment again and wrap around, the animation comes from the right side
           setR(cur);
@@ -158,7 +158,7 @@ export class VCarousel {
         if (i < end) {
           cur.classList?.toggle('active', true);
         } else {
-          if (inc === false && this.page === 0 && (this.children.length - this.pagesize) < i) {
+          if (inc === false && this.page === 0 && (this.children.length - this.pageSize) < i) {
             // if we're on the first page (and decrementing), prep to the last view's
             // worth of children so if we decrement again and wrap around, the animation should come from the left side
             setL(cur);
@@ -190,14 +190,14 @@ export class VCarousel {
     return (
       <Host>
         <style>
-          {`.carousel-wrapper { min-width: calc(${this.pagesize * 50}px + ${this.pagesize} * 3em)}
+          {`.carousel-wrapper { min-width: calc(${this.pageSize * 50}px + ${this.pageSize} * 3em)}
           .carousel-wrapper > li {
-            margin: 0 ${100 / this.pagesize / 4}%;
+            margin: 0 ${100 / this.pageSize / 4}%;
            }`}
         </style>
         <section aria-labeledby={"sectionTitle"}>
           <h2 id={"sectionTitle"} tabindex={"-1"}>{this.sectionTitle}<span
-            class={"sr-only"}>{`, has ${this.pageMax} pages with ${this.pagesize} each`}</span></h2>
+            class={"sr-only"}>{`, has ${this.pageMax} pages with ${this.pageSize} each`}</span></h2>
           <div class={"carousel-body"}>
             <button type={'button'} onClick={this._decSlide}><span
               class={"sr-only"}>{`Previous Page Show page ${this.page <= 0 ? this.pageMax : this.page - 1} of ${this.pageMax}`}</span></button>
