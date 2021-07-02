@@ -6,17 +6,29 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface JsCarousel {
+    }
+    interface JsCarouselInner {
+        "infinite": boolean;
+        "rtl": boolean;
+        "swipe": any;
+        "touchMove": boolean;
+        "unslick": boolean;
+        "vertical": boolean;
+    }
     interface VCarousel {
         /**
           * The number of elements to show per page view. Defaults to 3
           * @type {number}
+          * @member VCarousel
          */
         "pageSize": number;
         /**
           * Section title to use in heading
-          * @type {string}
+          * @type string
+          * @memberOf VCarousel
          */
-        "sectionTitle": "Carousel!";
+        "sectionTitle": string;
         /**
           * If defined/true, sets a mutation observer to reinitialize the component when child nodes are changed.  Otherwise ignores changes to child nodes.
           * @type {boolean}
@@ -25,6 +37,18 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLJsCarouselElement extends Components.JsCarousel, HTMLStencilElement {
+    }
+    var HTMLJsCarouselElement: {
+        prototype: HTMLJsCarouselElement;
+        new (): HTMLJsCarouselElement;
+    };
+    interface HTMLJsCarouselInnerElement extends Components.JsCarouselInner, HTMLStencilElement {
+    }
+    var HTMLJsCarouselInnerElement: {
+        prototype: HTMLJsCarouselInnerElement;
+        new (): HTMLJsCarouselInnerElement;
+    };
     interface HTMLVCarouselElement extends Components.VCarousel, HTMLStencilElement {
     }
     var HTMLVCarouselElement: {
@@ -32,21 +56,35 @@ declare global {
         new (): HTMLVCarouselElement;
     };
     interface HTMLElementTagNameMap {
+        "js-carousel": HTMLJsCarouselElement;
+        "js-carousel-inner": HTMLJsCarouselInnerElement;
         "v-carousel": HTMLVCarouselElement;
     }
 }
 declare namespace LocalJSX {
+    interface JsCarousel {
+    }
+    interface JsCarouselInner {
+        "infinite"?: boolean;
+        "rtl"?: boolean;
+        "swipe"?: any;
+        "touchMove"?: boolean;
+        "unslick"?: boolean;
+        "vertical"?: boolean;
+    }
     interface VCarousel {
         /**
           * The number of elements to show per page view. Defaults to 3
           * @type {number}
+          * @member VCarousel
          */
         "pageSize"?: number;
         /**
           * Section title to use in heading
-          * @type {string}
+          * @type string
+          * @memberOf VCarousel
          */
-        "sectionTitle"?: "Carousel!";
+        "sectionTitle"?: string;
         /**
           * If defined/true, sets a mutation observer to reinitialize the component when child nodes are changed.  Otherwise ignores changes to child nodes.
           * @type {boolean}
@@ -54,6 +92,8 @@ declare namespace LocalJSX {
         "watchChildren"?: boolean;
     }
     interface IntrinsicElements {
+        "js-carousel": JsCarousel;
+        "js-carousel-inner": JsCarouselInner;
         "v-carousel": VCarousel;
     }
 }
@@ -61,6 +101,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "js-carousel": LocalJSX.JsCarousel & JSXBase.HTMLAttributes<HTMLJsCarouselElement>;
+            "js-carousel-inner": LocalJSX.JsCarouselInner & JSXBase.HTMLAttributes<HTMLJsCarouselInnerElement>;
             "v-carousel": LocalJSX.VCarousel & JSXBase.HTMLAttributes<HTMLVCarouselElement>;
         }
     }

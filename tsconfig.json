@@ -8,8 +8,6 @@
       "dom",
       "es2017"
     ],
-    "inlineSourceMap": true,
-    "inlineSources": true,
     "moduleResolution": "node",
     "module": "esnext",
     "target": "es2017",

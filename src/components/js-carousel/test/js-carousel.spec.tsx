@@ -1,24 +1,18 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { VCarousel } from '../v-carousel';
+import { JsCarousel } from '../js-carousel';
 
-
-
-describe('v-carousel', () => {
-
+describe('js-carousel', () => {
   it('renders', async () => {
     const page = await newSpecPage({
-      components: [VCarousel],
-      html: `<v-carousel></v-carousel>`,
+      components: [JsCarousel],
+      html: `<js-carousel></js-carousel>`,
     });
     expect(page.root).toEqualHtml(`
-      <v-carousel>
+      <js-carousel>
         <mock:shadow-root>
           <slot></slot>
         </mock:shadow-root>
-      </v-carousel>
+      </js-carousel>
     `);
-
   });
-
-
 });

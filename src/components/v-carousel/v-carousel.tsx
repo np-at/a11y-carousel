@@ -13,14 +13,15 @@ export class VCarousel {
 
   /**
    * Section title to use in heading
-   * @type {string}
+   * @type string
+   * @memberOf VCarousel
    */
-  @Prop() readonly sectionTitle = "Carousel!"
+  @Prop({}) readonly sectionTitle: string = "Carousel!";
 
   /**
-   *   The number of elements to show per page view.
-   Defaults to 3
+   * The number of elements to show per page view. Defaults to 3
    * @type {number}
+   * @member VCarousel
    */
   @Prop() readonly pageSize: number = 3;
 
@@ -64,7 +65,9 @@ export class VCarousel {
 
   private _initialize = (..._) => {
     console.debug("mutation args?: ", ..._)
-    this.children = Array.from(this.host.children).map((child, index) => <li key={`c+${index}`} aria-setsize={this.host.children.length} aria-posinset={index}
+    this.children = Array.from(this.host.children).map((child, index) => <li key={`c+${index}`}
+                                                                             aria-setsize={this.host.children.length}
+                                                                             aria-posinset={index}
                                                                              innerHTML={child.outerHTML}/>);
     this.pageMax = Math.floor(this.children.length / this.pageSize) + (this.children.length % this.pageSize === 0 ? 0 : 1);
     this._initPaginationItems();
@@ -118,6 +121,11 @@ export class VCarousel {
     this._updateActive(false);
     this._setFocusToStart();
   };
+
+  /**
+   *
+   * @param {any} inc
+   */
   private _updateActive = (inc = undefined) => {
     /**
      * Convenience functions to set `l-slide`
@@ -200,11 +208,12 @@ export class VCarousel {
             class={"sr-only"}>{`, has ${this.pageMax} pages with ${this.pageSize} each`}</span></h2>
           <div class={"carousel-body"}>
             <button type={'button'} onClick={this._decSlide}><span
-              class={"sr-only"}>{`Previous Page Show page ${this.page <= 0 ? this.pageMax : this.page - 1} of ${this.pageMax}`}</span></button>
+              class={"sr-only"}>{`Previous Page Show page ${this.page <= 0 ? this.pageMax : this.page - 1} of ${this.pageMax}`}</span>
+            </button>
             <button type={'button'} onClick={this._advSlide}><span
               class={"sr-only"}>{`Next Page Show page ${this.page + 1} of ${this.pageMax}`}</span></button>
             <ol class={"carousel-wrapper"}>
-              {this.children}
+              {this.host.children}
             </ol>
           </div>
           <ol class={"pagination-nav"}>{this.paginationItems}</ol>

@@ -44,7 +44,7 @@ module.exports = {
     '@stencil/props-must-be-public': 'error',
     '@stencil/props-must-be-readonly': 'error',
     '@stencil/render-returns-host': 'error',
-    '@stencil/required-jsdoc': 'error',
+    '@stencil/required-jsdoc': 'off',
     '@stencil/reserved-member-names': 'error',
     '@stencil/single-export': 'error',
     '@stencil/strict-mutable': 'error',
